@@ -29,7 +29,7 @@
             <div id="product-list"> 
                 <!-- GENERATE PRODUCTS -->
                 <?php
-                    $statement = $connection->prepare("SELECT * FROM products");
+                    $statement = $connection->prepare("SELECT * FROM products LIMIT 10");
                     $statement->execute();
                     $result = $statement->fetchAll();
                     foreach($result as $row) {
