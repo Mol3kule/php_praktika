@@ -64,9 +64,7 @@ body {
     display: grid;
     margin-top: 15px;
     height: 90%;
-    /* border: 1px solid white; */
-    /* width: 100%; */
-    grid-template-columns: repeat(auto-fit, minmax(350px, 400px));;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 320px));;
     justify-content: center;
     overflow-y: scroll;
     scrollbar-width: none;
@@ -75,12 +73,8 @@ body {
 .product {
     width: 300px;
     height: auto;
-    border: 1px solid white;
     font-size: 18px;
     text-align: left;
-    gap: 0 35px 0 0;
-    /* margin-left: 35px; */
-    /* margin-right: 35px; */
 }
 
 .productImg {
