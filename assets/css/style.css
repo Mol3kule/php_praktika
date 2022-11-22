@@ -62,7 +62,15 @@ body {
     display: grid;
     margin-top: 15px;
     height: 93%;
+    width: 100%;
     grid-template-columns: auto auto auto auto auto;
+    justify-content: center;
+}
+
+@media screen and (min-height: 1920px) {
+    #product-list {
+        grid-template-columns: auto auto auto auto;
+    }
 }
 
 .product {
