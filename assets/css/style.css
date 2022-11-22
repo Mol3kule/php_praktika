@@ -70,6 +70,10 @@ body {
     scrollbar-width: none;
 }
 
+#product-list::-webkit-scrollbar {
+    display: none;
+}
+
 .product {
     width: 300px;
     height: auto;
