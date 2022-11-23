@@ -29,9 +29,39 @@
             <div id="product-list"> 
                 <!-- GENERATE PRODUCTS -->
                 <?php
-                    $statement = $connection->prepare("SELECT * FROM products LIMIT 10");
+                    function ClearProducts() {
+                        $doc = new DOMDocument();
+                        $doc->validateOnParse = true;
+                        if (isset($_GET['doc'])) {
+                            $doc->getElementById('product-list')->nodeValue = null;
+                        }
+                    }
+
+                    // PAGINATION
+                    if (isset($_GET['page_no']) && $_GET['page_no']!="") {
+                        $page_no = $_GET['page_no'];
+                    } else {
+                        $page_no = 1;
+                    }
+                    
+                    $total_records_per_page = 10;
+                    $offset = ($page_no-1) * $total_records_per_page;
+                    $previous_page = $page_no - 1;
+                    $next_page = $page_no + 1;
+                    $adjacents = "2";
+
+                    $result_count = $connection->prepare("SELECT COUNT(*) As total_records FROM `products`" );
+                    $total_records->execute();
+                    $total_records = $total_records->fetchAll($result_count);
+                    $total_records = $total_records['total_records'];
+                    $total_no_of_pages = ceil($total_records / $total_records_per_page);
+                    $second_last = $total_no_of_pages - 1; // total pages minus 1
+                    // END OF PAGINATION
+
+                    $statement = $connection->prepare("SELECT * FROM products LIMIT $offset, $total_records_per_page");
                     $statement->execute();
                     $result = $statement->fetchAll();
+
                     foreach($result as $row) {
                 ?>
                 <div class="product">
