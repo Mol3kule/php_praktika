@@ -50,10 +50,11 @@
                     $next_page = $page_no + 1;
                     $adjacents = "2";
 
-                    $result_count = $connection->prepare("SELECT COUNT(*) As total_records FROM `products`" );
-                    $total_records->execute();
-                    $total_records = $total_records->fetchAll($result_count);
+                    $result_count = $connection->prepare("SELECT COUNT(*) AS total_records FROM `products`" );
+                    $result_count->execute();
+                    $total_records = $result_count->fetchAll();
                     $total_records = $total_records['total_records'];
+                    print_r($total_records);
                     $total_no_of_pages = ceil($total_records / $total_records_per_page);
                     $second_last = $total_no_of_pages - 1; // total pages minus 1
                     // END OF PAGINATION

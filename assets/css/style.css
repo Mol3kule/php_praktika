@@ -101,3 +101,6 @@ body {
     padding: 8px 16px;
     text-decoration: none;
 }
+.disabled {
+    background-color: 'white';
+}
