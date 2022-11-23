@@ -70,6 +70,27 @@
                     <div class="product-quantity"><span style="color: red;">Sandelyje:</span> <?php echo $row["quantity"]; ?></div>
                 </div>
                 <?php } ?>
+                <ul class="pagination">
+                    <?php if($page_no > 1){
+                    echo "<a href='?page_no=1'>First Page</a>";
+                    } ?>
+                        
+                    <?php if($page_no <= 1){ echo "class='disabled'"; } ?>
+                    <a <?php if($page_no > 1){
+                    echo "href='?page_no=$previous_page'";
+                    } ?>>Previous</a>
+                        
+                    <?php if($page_no >= $total_no_of_pages){
+                    echo "class='disabled'";
+                    } ?>
+                    <a <?php if($page_no < $total_no_of_pages) {
+                    echo "href='?page_no=$next_page'";
+                    } ?>>Next</a>
+
+                    <?php if($page_no < $total_no_of_pages){
+                    echo "<a href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a>";
+                    } ?>
+                </ul>
             </div>
         </div>
     </div>
