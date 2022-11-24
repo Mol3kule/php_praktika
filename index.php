@@ -53,7 +53,9 @@
                     $result_count = $connection->prepare("SELECT COUNT(*) AS total_records FROM `products`" );
                     $result_count->execute();
                     $total_records = $result_count->fetchAll();
-                    $total_records = $total_records['total_records'];
+                    foreach($total_records as $record_count) {
+                        $total_records = $record_count['total_records'];
+                    }
                     print_r($total_records);
                     $total_no_of_pages = ceil($total_records / $total_records_per_page);
                     $second_last = $total_no_of_pages - 1; // total pages minus 1
@@ -71,7 +73,7 @@
                     <div class="product-quantity"><span style="color: red;">Sandelyje:</span> <?php echo $row["quantity"]; ?></div>
                 </div>
                 <?php } ?>
-                <ul class="pagination">
+                <div class="pagination">
                     <?php if($page_no > 1){
                     echo "<a href='?page_no=1'>First Page</a>";
                     } ?>
@@ -91,7 +93,7 @@
                     <?php if($page_no < $total_no_of_pages){
                     echo "<a href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a>";
                     } ?>
-                </ul>
+                </div>
             </div>
         </div>
     </div>
