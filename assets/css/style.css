@@ -5,13 +5,13 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: rgb(36, 36, 36);
 }
 
 .container {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: rgb(36, 36, 36);
 }
 
 /* .top-nav-ct {
@@ -64,9 +64,12 @@ body {
     display: grid;
     margin-top: 15px;
     height: 90%;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 320px));;
-    justify-content: center;
+    /* justify-content: center; */
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-gap: 40px;
+    /* align-content: center; */
     overflow-y: scroll;
+    overflow-x: hidden;
     scrollbar-width: none;
 }
 
@@ -75,6 +78,8 @@ body {
 }
 
 .product {
+    margin-right: 15%;
+    margin-left: 17%;
     width: 300px;
     height: auto;
     font-size: 18px;
@@ -92,15 +97,30 @@ body {
 }
 
 .pagination {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
-  
-.pagination a {
-    color: black;
-    float: left;
-    padding: 8px 16px;
+
+.pagination li {
+    border: 1px solid white;
+    list-style-type: none;
+    padding: 5px;
+    /* color: rgb(112, 190, 190); */
     text-decoration: none;
 }
-.disabled {
-    background-color: 'white';
+
+.pagination li a {
+    color: white;
+    text-decoration: none;
+}
+.active {
+    background-color: white;
+}
+.pagination .active a {
+    color: black;
+}
+
+.disabled a {
+    color: lightblue;
 }
