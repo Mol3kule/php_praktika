@@ -11,9 +11,6 @@
 </head>
 
 <body>
-    <?php
-    require('./components/database.php');
-    ?>
     <div class="container">
         <!-- TOP NAVIGATION BAR -->
         <div class="top-nav-ct">
@@ -28,6 +25,7 @@
             <div id="product-list">
                 <!-- GENERATE PRODUCTS -->
                 <?php
+                require('./components/database.php');
                 function ClearProducts()
                 {
                     $doc = new DOMDocument();
