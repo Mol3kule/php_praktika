@@ -49,13 +49,4 @@ h1.login-title {
 h3 {
     font-weight: normal;
     text-align: center;
-}
-.back-button {
-    width: 60px;
-    border: 1px solid white;
-    height: 20px;
-    
-}
-.home {
-    text-decoration: none;
-}
+} 

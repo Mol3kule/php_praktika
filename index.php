@@ -15,8 +15,8 @@
         <!-- TOP NAVIGATION BAR -->
         <div class="top-nav-ct">
             <ul class="top-nav">
-                <a class="nav-bar register" href="login/registration.php">Registruotis</a>
-                <a class="nav-bar login" href="login/login.php">Prisijungti</a>
+                <a class="nav-bar register" href="components/registration.php">Registruotis</a>
+                <a class="nav-bar login" href="components/login.php">Prisijungti</a>
             </ul>
         </div>
         <hr>
