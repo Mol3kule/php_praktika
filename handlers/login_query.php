@@ -12,10 +12,9 @@ if (isset($_POST['login'])) {
 		$row = $query->rowCount();
 		$fetch = $query->fetch();
 		if ($row > 0) {
-			$_SESSION['UId'] = $fetch['id'];
-			$_SESSION['username'] = $fetch['username'];
-			$_SESSION['password'] = $fetch['password'];
-			// new User($fetch['id'], $fetch['username'], $fetch['password']);
+			setcookie('UId', $fetch['id']);
+			setcookie('username', $fetch['username']);
+			setcookie('password', $fetch['password']);
 			header("location: ../index.php");
 		} else {
 			echo "<script>alert('Invalid username or password')</script>
