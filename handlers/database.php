@@ -1,6 +1,6 @@
 <?php
     try {
-        $connection = null;
+        // $connection = null;
         if (!$connection) {
             $connection = new PDO("mysql:host=localhost;dbname=php_job", "root", "");
         }
