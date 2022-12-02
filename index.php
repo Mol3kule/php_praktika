@@ -25,7 +25,7 @@
             <div id="product-list">
                 <!-- GENERATE PRODUCTS -->
                 <?php
-                require('./components/database.php');
+                require('./handlers/database.php');
                 function ClearProducts()
                 {
                     $doc = new DOMDocument();
