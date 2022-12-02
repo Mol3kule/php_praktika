@@ -12,8 +12,8 @@
 
 <body>
 	<form class="form" action="./components/login_query.php" method="POST">
-		<input type="text" class="login-input" name="username" />
-		<input type="password" class="login-input" name="password" />
+		<input type="text" class="login-input" name="username" placeholder="Slapyvardis"/>
+		<input type="password" class="login-input" name="password" placeholder="Slaptažodis"/>
 		<button class="login-button" name="login">Prisijungti</button>
 		<p class="link"><a href="./registration.php">Registruotis</a></p>
 	</form>
