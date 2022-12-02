@@ -18,13 +18,13 @@
 			} else{
 				echo "
 				<script>alert('Invalid username or password')</script>
-				<script>window.location = 'login.php'</script>
+				<script>window.location = '../components/login.php'</script>
 				";
 			}
 		}else{
 			echo "
 				<script>alert('Please complete the required field!')</script>
-				<script>window.location = 'login.php'</script>
+				<script>window.location = '../components/login.php'</script>
 			";
 		}
 	}
