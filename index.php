@@ -15,8 +15,17 @@
         <!-- TOP NAVIGATION BAR -->
         <div class="top-nav-ct">
             <ul class="top-nav">
-                <a class="nav-bar register" href="components/registration.php">Registruotis</a>
-                <a class="nav-bar login" href="components/login.php">Prisijungti</a>
+                <?php
+                    session_start();
+                    $_SESSION['UId'] = 0;
+                    if ($_SESSION['UId'] <= 0) {
+                        echo('USER ID:' . $_SESSION['UId']);
+                ?>
+                    <a class="nav-bar register" href="components/registration.php">Registruotis</a>
+                    <a class="nav-bar login" href="components/login.php">Prisijungti</a>
+                <?php } else {?>
+                    <a class="nav-bar logout" href="components/logout.php">Atsijungti</a>
+                <?php }?>
             </ul>
         </div>
         <hr>

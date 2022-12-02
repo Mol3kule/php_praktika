@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +10,7 @@
 </head>
 
 <body>
-	<form class="form" action="./components/login_query.php" method="POST">
+	<form class="form" action="../handlers/login_query.php" method="POST">
 		<input type="text" class="login-input" name="username" placeholder="Slapyvardis"/>
 		<input type="password" class="login-input" name="password" placeholder="Slaptažodis"/>
 		<button class="login-button" name="login">Prisijungti</button>

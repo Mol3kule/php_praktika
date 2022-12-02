@@ -1,5 +1,5 @@
 <?php
-	session_start();
+	// session_start();
 	require_once './database.php';
  
 	if(ISSET($_POST['register'])){
@@ -9,13 +9,12 @@
 				$email = $_POST['email'];
 				$password = $_POST['password'];
 				$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				$result = $connection->prepare("INSERT INTO `users` SET `username` = $username, `email` = '$email', `password` = $password")->execute();
+				$result = $connection->prepare("INSERT INTO `users` SET `username` = '$username', `email` = '$email', `password` = '$password'")->execute();
 				header('location: ../components/login.php');
 				$_SESSION['message']=array("text" => "User successfully created.", "alert"=>"info");
 			} catch (PDOException $e){
 				echo $e->getMessage();
 			}
-			// $connection = null; JULIAU KODEL????
 		}else{
 			echo "
 				<script>alert('Please fill up the required field!')</script>
