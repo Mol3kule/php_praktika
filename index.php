@@ -16,8 +16,7 @@
         <div class="top-nav-ct">
             <ul class="top-nav">
                 <?php
-                    session_start();
-                    $_SESSION['UId'] = 0;
+                    if (!session_start()) { session_start(); }
                     if ($_SESSION['UId'] <= 0) {
                         echo('USER ID:' . $_SESSION['UId']);
                 ?>
