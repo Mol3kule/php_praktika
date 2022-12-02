@@ -14,7 +14,7 @@
 		<input type="text" class="login-input" name="username" placeholder="Slapyvardis" required />
 		<input type="text" class="login-input" name="email" placeholder="El. paštas" required />
 		<input type="password" class="login-input" name="password" placeholder="Slaptažodis" required />
-		<button class="login-button" name="register">Registruotis</button>
+		<button class="login-button" type="submit" name="register">Registruotis</button>
 		<p class="link"><a href="./login.php">Prisijungti</a></p>
 	</form>
 </body>
