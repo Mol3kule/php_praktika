@@ -1,6 +1,4 @@
 <?php
-// session_start();
-
 require_once 'database.php';
 
 if (isset($_POST['login'])) {
@@ -12,9 +10,9 @@ if (isset($_POST['login'])) {
 		$row = $query->rowCount();
 		$fetch = $query->fetch();
 		if ($row > 0) {
-			setcookie('UId', $fetch['id']);
-			setcookie('username', $fetch['username']);
-			setcookie('password', $fetch['password']);
+			setcookie('UId', $fetch['id'], 0, "/");
+			setcookie('username', $fetch['username'], 0, "/");
+			setcookie('password', $fetch['password'], 0, "/");
 			header("location: ../index.php");
 		} else {
 			echo "<script>alert('Invalid username or password')</script>
