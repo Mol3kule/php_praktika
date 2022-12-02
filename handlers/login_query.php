@@ -2,6 +2,7 @@
 session_start();
 
 require_once 'database.php';
+require_once '../classes/user.php';
 
 if (isset($_POST['login'])) {
 	if ($_POST['username'] != "" || $_POST['password'] != "") {
@@ -13,6 +14,11 @@ if (isset($_POST['login'])) {
 		$fetch = $query->fetch();
 		if ($row > 0) {
 			$_SESSION['user'] = $fetch['id'];
+			$User->$UId = $fetch['id'];
+			$User->$Username = $username;
+			$User->$Password = $password;
+
+			print_r($User);
 			header("location: ../index.php");
 		} else {
 			echo "

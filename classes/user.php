@@ -9,4 +9,5 @@
             $this->Password = $Password;
         }
     }
+    $User = new User(null, null, null);
 ?>
