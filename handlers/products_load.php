@@ -1,8 +1,9 @@
 <?php
 
-require_once './database.php';
 
 function LoadProductsPaged($category) {
+    require_once 'database.php';
+
     if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
         $page_no = $_GET['page_no'];
     } else {
@@ -18,7 +19,7 @@ function LoadProductsPaged($category) {
     $result_count = $connection->prepare("SELECT COUNT(*) AS total_records FROM `products` WHERE `category` = '$category'");
     $result_count->execute();
     $total_records = $result_count->fetchAll();
-    foreach ($total_records as $record_count) {
+    foreach ($total_records as $record_count) { 
         $total_records = $record_count['total_records'];
     }
     $total_no_of_pages = ceil($total_records / $total_records_per_page);
@@ -28,88 +29,7 @@ function LoadProductsPaged($category) {
     $statement = $connection->prepare("SELECT * FROM products LIMIT $offset, $total_records_per_page WHERE `category` = '$category'");
     $statement->execute();
     $result = $statement->fetchAll();
-
-    // foreach ($result as $row) {?>
-    <!--     <div class="product">
-    //         <img class="productImg" src="<?php echo $row["imageSrc"]; ?>" alt="Not Loaded">
-    //         <div class="product-name"><?php echo $row["product_name"]; ?></div>
-    //         <div class="product-quantity"><span style="color: red;">Sandelyje:</span> <?php echo $row["quantity"]; ?></div>
-    //     </div> -->
-    <?php //} ?>
-    
-    
-<?php
-}
-function Pagination() {
-    ?><ul class="pagination">
-        <li <?php if ($page_no <= 1) {
-                echo "class='disabled'";
-            } ?>>
-            <a <?php if ($page_no > 1) {
-                    echo "href='?page_no=$previous_page'";
-                } ?>>&#8249&#8249 Previous</a>
-        </li>
-    <?php
-        if ($total_no_of_pages <= 10) {
-            for ($counter = 1; $counter <= $total_no_of_pages; $counter++) {
-                if ($counter == $page_no) {
-                    echo "<li class='active'><a>$counter</a></li>";
-                } else {
-                    echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                }
-            }
-        } elseif ($total_no_of_pages > 10) {
-            if ($page_no <= 4) {
-                for ($counter = 1; $counter < 8; $counter++) {
-                    if ($counter == $page_no) {
-                        echo "<li class='active'><a>$counter</a></li>";
-                    } else {
-                        echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                    }
-                }
-                echo "<li><a>...</a></li>";
-                echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-            } elseif ($page_no > 4 && $page_no < $total_no_of_pages - 4) {
-                echo "<li><a href='?page_no=1'>1</a></li>";
-                echo "<li><a href='?page_no=2'>2</a></li>";
-                echo "<li><a>...</a></li>";
-                for ($counter = $page_no - $adjacents; $counter <= $page_no + $adjacents; $counter++) {
-                    if ($counter == $page_no) {
-                        echo "<li class='active'><a>$counter</a></li>";
-                    } else {
-                        echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                    }
-                }
-                echo "<li><a>...</a></li>";
-                echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-            } else {
-                echo "<li><a href='?page_no=1'>1</a></li>";
-                echo "<li><a href='?page_no=2'>2</a></li>";
-                echo "<li><a>...</a></li>";
-                for ($counter = $total_no_of_pages - 6; $counter <= $total_no_of_pages; $counter++) {
-                    if ($counter == $page_no) {
-                        echo "<li class='active'><a>$counter</a></li>";
-                    } else {
-                        echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                    }
-                }
-            }
-        }
-        ?>
-
-        <li <?php if ($page_no >= $total_no_of_pages) {
-                echo "class='disabled'";
-            } ?>>
-            <a <?php if ($page_no < $total_no_of_pages) {
-                    echo "href='?page_no=$next_page'";
-            } ?>>Next</a>
-        </li>
-
-        <?php if ($page_no < $total_no_of_pages) {
-            echo "<li><a href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
-        } ?>
-    </ul>
-    <?php
+    // CIA TURI EITI RESULT FOREACH
+    // -> 
+    // END
 }

@@ -31,8 +31,7 @@
                 <!-- GENERATE PRODUCTS -->
                 <?php
                 require('./handlers/database.php');
-                function ClearProducts()
-                {
+                function ClearProducts() {
                     $doc = new DOMDocument();
                     $doc->validateOnParse = true;
                     if (isset($_GET['doc'])) {
