@@ -132,3 +132,31 @@ body {
 .disabled a {
     color: lightblue;
 }
+
+/* CATEGORY */
+
+#category-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#category-list .category {
+    background: none;
+    padding: 4px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid white;
+    font-size: 18px;
+    color: white;
+    transition: 0.3s;
+    text-transform: capitalize;
+}
+
+#category-list .category:hover {
+    
+    transition: 0.3s;
+    color: rgba(225, 225, 225, 0.7);
+    border: 1px solid rgba(225, 225, 225, 0.7);
+}

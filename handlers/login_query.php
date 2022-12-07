@@ -1,11 +1,14 @@
 <?php
-require_once 'database.php';
+require_once './database.php';
+
+$db = new Database();
+$db->Open();
 
 if (isset($_POST['login'])) {
 	if ($_POST['username'] != "" || $_POST['password'] != "") {
 		$username = $_POST['username'];
 		$password = $_POST['password'];
-		$query = $connection->prepare("SELECT * FROM `users` WHERE `username` = ? AND `password` = ? ");
+		$query = $db->connection->prepare("SELECT * FROM `users` WHERE `username` = ? AND `password` = ?");
 		$query->execute(array($username, $password));
 		$row = $query->rowCount();
 		$fetch = $query->fetch();
@@ -20,6 +23,7 @@ if (isset($_POST['login'])) {
 		}
 	} else {
 		echo "<script>alert('Please complete the required field!')</script>
-				<script>window.location = '../components/login.php'</script>";
+			<script>window.location = '../components/login.php'</script>";
 	}
+	$db->Close();
 }
