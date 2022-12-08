@@ -1,7 +1,0 @@
-<?php foreach ($result as $row) {?>
-    <div class="product">
-        <img class="productImg" src="<?php echo $row["imageSrc"]; ?>" alt="Not Loaded">
-        <div class="product-name"><?php echo $row["product_name"]; ?></div>
-        <div class="product-quantity"><span style="color: red;">Sandelyje:</span> <?php echo $row["quantity"]; ?></div>
-    </div>
-<?php } ?>

@@ -1,0 +1,3 @@
+<?php
+// $gList = [];
+$GLOBALS["gList"] = [];

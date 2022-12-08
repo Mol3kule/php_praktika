@@ -18,7 +18,11 @@ class LoadProducts {
         $this->next_page = $page_no + 1;
         $this->adjacents = "2";
 
-        $this->result_count = $db->connection->prepare("SELECT COUNT(*) AS total_records FROM `products` WHERE `category` = '$category'");
+        if ($category == '') {
+            $this->result_count = $db->connection->prepare("SELECT COUNT(*) AS total_records FROM `products`");
+        } else {
+            $this->result_count = $db->connection->prepare("SELECT COUNT(*) AS total_records FROM `products` WHERE `category` = '$category'");
+        }
         $this->result_count->execute();
         $this->total_records = $this->result_count->fetchAll();
         foreach ($this->total_records as $record_count) { 
@@ -27,10 +31,22 @@ class LoadProducts {
         $this->total_no_of_pages = ceil($total_records / $this->total_records_per_page);
         $this->second_last = $this->total_no_of_pages - 1; // total pages minus 1
 
-        $this->statement = $db->connection->prepare("SELECT * FROM products WHERE `category` = '$category' LIMIT $this->offset, $this->total_records_per_page");
+        if ($category == '') {
+            $this->statement = $db->connection->prepare("SELECT * FROM products LIMIT $this->offset, $this->total_records_per_page");
+        } else {
+            $this->statement = $db->connection->prepare("SELECT * FROM products WHERE `category` = '$category' LIMIT $this->offset, $this->total_records_per_page");
+        }
         $this->statement->execute();
         $this->paginationResult = $this->statement->fetchAll();
 
-        // $db->Close();
+        $db->Close();
     }
+
+    // function ClearProducts() {
+    //     $doc = new DOMDocument();
+    //     $doc->validateOnParse = true;
+    //     if (isset($_GET['doc'])) {
+    //         $doc->getElementById('product-list')->nodeValue = null;
+    //     }
+    // }
 }

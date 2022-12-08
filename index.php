@@ -28,29 +28,29 @@
         <div class="products-ct">
             Prekių katalogas
             <?php
+            // require_once './GlobalsList.php';
+            require_once './handlers/products_load.php';
             require_once './handlers/categories.php';
+
             $Categories = new Categories();
             $Categories->Load(); ?>
             <form id="category-list" action="" method="POST">
                 <?php foreach($Categories->result as $row) { ?>
-                    <input type="submit" name="category" class="category" value='<?php echo $row["category"] ?>'>
+                    <input type="submit" name="ctg" class="category" value='<?php echo $row["category"]; ?>'>
                 <?php } ?>
             </form>
             <div id="product-list">
                 <!-- GENERATE PRODUCTS -->
                 <?php
-                require_once './handlers/database.php';
-                require_once './handlers/products_load.php';
-
-                // function ClearProducts() {
-                //     $doc = new DOMDocument();
-                //     $doc->validateOnParse = true;
-                //     if (isset($_GET['doc'])) {
-                //         $doc->getElementById('product-list')->nodeValue = null;
-                //     }
-                // }
                 $ProductObj = new LoadProducts();
-                $ProductObj->Load('shoes');
+                $ProductObj->Load("Shoes");
+
+                include './GlobalsList.php';
+                global $gList;
+                $gList["ProductObj"] = $ProductObj;
+
+
+                // print_r($gList["ProductObj"]);
                 foreach ($ProductObj->paginationResult as $row) {?>
                     <div class="product">
                         <img class="productImg" src="<?php echo $row["imageSrc"]; ?>" alt="Not Loaded">

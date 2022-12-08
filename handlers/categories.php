@@ -1,5 +1,7 @@
 <?php
-require './handlers/database.php';
+require_once './handlers/database.php';
+// require_once './GlobalsList.php';
+include './GlobalsList.php';
 
 class Categories {
     public $result;
@@ -15,6 +17,9 @@ class Categories {
     }
 }
 
-if (isset($_POST["category"])) {
-    // echo $_POST["category"];
+if (isset($_POST["ctg"])) {
+    $category = $_POST["ctg"];
+    global $gList;
+    print_r($gList);
+    // print_r($GLOBALS["gList"]);
 }
