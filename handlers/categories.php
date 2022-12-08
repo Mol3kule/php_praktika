@@ -15,8 +15,8 @@ class Categories {
     }
 }
 
-if (isset($_POST["ctg"])) {
-    $category = $_POST["ctg"];
+// if (isset($_POST["ctg"])) {
+    // $category = $_POST["ctg"];
 
     // $test = new 
 
@@ -26,4 +26,4 @@ if (isset($_POST["ctg"])) {
     // var_dump($filters);
     // unset($filters);
     // }
-}
+// }

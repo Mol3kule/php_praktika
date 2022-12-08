@@ -27,7 +27,7 @@
         <hr>
         <div class="products-ct">
             <!-- Prekių katalogas -->
-            <?php
+            <?php include './products.functions.php';
             require_once './handlers/products_load.php';
             require_once './handlers/categories.php';
             $ProductObj = new LoadProducts();
@@ -36,25 +36,12 @@
             $filters = [];
             $Categories = new Categories();
             $Categories->Load();
-
-            // if (!isset($_COOKIE["ProductObj"])) {
-                // setcookie("ProductObject", json_encode());
-            // }
-            
-
-            include './products.functions.php';
-            // $test = ["test" => $ProductObj->paginationResult];
                    
             $ids = [];
-            
-            // vd($ProductObj->paginationResult);
             foreach($ProductObj->paginationResult as $result) {
                 $ids[] .= $result['id'];
             }
-            
             $testIds = ["test" => $ids];
-            // echo json_encode($test);
-            // echo json_encode($ProductObj->paginationResult);
 
             foreach($Categories->result as $category) {
                 array_push($filters, $category);
@@ -64,19 +51,10 @@
                     <input type="submit" name="ctg" class="category" onclick="" value='<?php echo $filter["category"];?>'>
                 <?php }?>
             </form>
+
             <div id="product-list">
                 <!-- GENERATE PRODUCTS -->
-                <!-- <?php //foreach ($ProductObj->paginationResult as $row) {?>
-                    <div class="product">
-                        <img class="productImg" src="<?php //echo $row["imageSrc"]; ?>" alt="Not Loaded">
-                        <div class="product-name"><?php //echo $row["product_name"]; ?></div>
-                        <div class="product-quantity"><span style="color: red;">Sandelyje:</span> <?php //echo $row["quantity"]; ?></div>
-                    </div>
-                <?php //} ?> -->
                 <script>
-                    // var data = {};
-                    
-                    // data = "<?php //echo json_encode($ProductObj->paginationResult, true); ?>";
                     $.ajax({
                         url: 'ajax/getProductList.ajax.php',
                         type: "GET",
@@ -85,7 +63,6 @@
                     }).always(function(callback){
                         $("#product-list").append(callback.html);
                     });
-
                 </script>
             </div>
             <?php
@@ -96,14 +73,4 @@
         </div>
     </div>
 </body>
-<script>
-    function ClearCategory() {
-        let list = document.getElementById('product-list');
-        list.innerHTML = null;
-        <?php 
-            unset($filters);
-        ?>
-        location.reload();
-    }
-</script>
 </html>
