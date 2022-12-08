@@ -1,7 +1,5 @@
 <?php
 require_once './handlers/database.php';
-// require_once './GlobalsList.php';
-include './GlobalsList.php';
 
 class Categories {
     public $result;
@@ -19,9 +17,13 @@ class Categories {
 
 if (isset($_POST["ctg"])) {
     $category = $_POST["ctg"];
-    if(!empty($_POST['filter'])) {
-    $filters = json_decode($_POST['filter'], true);
-    var_dump($filters);
-    unset($filters);
-    }
+
+    // $test = new 
+
+    // echo $category;
+    // if(!empty($_POST['ctg'])) {
+    // $filters = json_decode($_POST['ctg'], true);
+    // var_dump($filters);
+    // unset($filters);
+    // }
 }
