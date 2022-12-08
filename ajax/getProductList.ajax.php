@@ -2,31 +2,42 @@
 
 require '../handlers/database.php';
 
-// if (isset($_POST["ctg"])) {
-    // $category = $_POST["ctg"];
-    $db = new Database();
-    $db->Open();
+// require_once './handlers/pagination.php';
+// $Pagination = new Pagination();
+// $Pagination->Load($_GET["ProductObj"]);
 
-    $toFetchIds = $_GET['test'];
+$db = new Database();
+$db->Open();
 
-    $results = [];
+$category = $_GET["category"];
+$query = $db->connection->prepare("SELECT * FROM `products` WHERE `category` = '$category' LIMIT 10"); // prideti OFF
+$query->execute();
+$result = $query->fetchAll();
+$html = "";
+foreach($result as $row) {
+    $html .= "
+    <div class='product'>
+        <img class='productImg' src={$row['imageSrc']} alt='Not Loaded'>
+        <div class='product-name'>{$row['product_name']}</div>
+        <div class='product-quantity'><span style='color: red;'>Sandelyje:</span> {$row['quantity']} </div>
+    </div>";
+}
 
-    foreach($toFetchIds as $id) {
-        $query = $db->connection->prepare("SELECT * FROM `products` WHERE `id` = $id");
-        $query->execute();
-        $result = $query->fetch();
-        array_push($results, $result);
-    }
-    $html = '';
-    foreach($results as $row) {
-    
-        $html .= "
-        <div class='product'>
-            <img class='productImg' src={$row['imageSrc']} alt='Not Loaded'>
-            <div class='product-name'>{$row['product_name']}</div>
-            <div class='product-quantity'><span style='color: red;'>Sandelyje:</span> {$row['quantity']} </div>
-        </div>";
-    }
-    
-    echo json_encode(['html' => $html]);
-// }
+$Pagination = "";
+if (isset($_GET['page_no']) && $_GET['page_no'] != '') {
+    $page_no = $_GET['page_no'];
+} else {
+   $page_no = 1;
+}
+
+if ($page_no <= 1) {
+    $Pagination .= "<li class='disabled'> </li>";
+} if ($page_no > 1) {
+    $Pagination .= "<li> <a href='?page_no=$ProductObj->previous_page'>&#8249&#8249 Atgal </a> </li>";
+}
+
+
+$Pagination .= "";
+
+
+echo json_encode(['products' => $html, 'pagination' => $Pagination]);

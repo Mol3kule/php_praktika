@@ -26,6 +26,7 @@
         </div>
         <hr>
         <div class="products-ct">
+            Produktai
             <!-- Prekių katalogas -->
             <?php include './products.functions.php';
             require_once './handlers/products_load.php';
@@ -36,42 +37,36 @@
             $filters = [];
             $Categories = new Categories();
             $Categories->Load();
-                   
-            $ids = [];
-            foreach($ProductObj->paginationResult as $result) {
-                $ids[] .= $result['id'];
-            }
-            $testIds = ["test" => $ids];
+
+            $TestObj = ['ProductObj' => $ProductObj];
 
             foreach($Categories->result as $category) {
                 array_push($filters, $category);
             }?>
             <form id="category-list" action="" method="POST">
                 <?php foreach($filters as $filter) {?>
-                    <input type="submit" name="ctg" class="category" onclick="LoadProducts();" value='<?php echo $filter["category"];?>'>
+                    <input type="button" name="ctg" class="category" value='<?php echo $filter["category"];?>'>
                 <?php }?>
             </form>
 
             <div id="product-list">
                 <!-- GENERATE PRODUCTS -->
                 <script>
-                    function LoadProducts() {
-                        $.ajax({
-                            url: 'ajax/getProductList.ajax.php',
-                            type: "GET",
-                            dataType: "json",
-                            data: <?php echo json_encode($testIds); ?>
-                        }).always(function(callback){
-                            $("#product-list").append(callback.html);
+                        $('.category').on('click', function(element) {
+                            $.ajax({
+                                url: 'ajax/getProductList.ajax.php',
+                                type: "GET",
+                                dataType: "json",
+                                // data: <php echo json_encode($testIds); ?>
+                                data: {"category": element.target.value, "ProductObj": {<?php json_encode($TestObj); ?>}}
+                            }).always(function(callback){
+                                $("#product-list").html(callback.products);
+                                $("#pagination-tab").html(callback.pagination);
+                            });
                         });
-                    }
                 </script>
             </div>
-            <?php
-                require_once './handlers/pagination.php';
-                $Pagination = new Pagination();
-                $Pagination->Load($ProductObj);
-            ?>
+            <ul id="pagination-tab" class="pagination"></ul>
         </div>
     </div>
 </body>

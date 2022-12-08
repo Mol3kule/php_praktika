@@ -41,12 +41,4 @@ class LoadProducts {
 
         $db->Close();
     }
-
-    // function ClearProducts() {
-    //     $doc = new DOMDocument();
-    //     $doc->validateOnParse = true;
-    //     if (isset($_GET['doc'])) {
-    //         $doc->getElementById('product-list')->nodeValue = null;
-    //     }
-    // }
 }

@@ -14,16 +14,3 @@ class Categories {
         $db->Close();
     }
 }
-
-// if (isset($_POST["ctg"])) {
-    // $category = $_POST["ctg"];
-
-    // $test = new 
-
-    // echo $category;
-    // if(!empty($_POST['ctg'])) {
-    // $filters = json_decode($_POST['ctg'], true);
-    // var_dump($filters);
-    // unset($filters);
-    // }
-// }
