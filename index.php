@@ -31,25 +31,28 @@
             // require_once './GlobalsList.php';
             require_once './handlers/products_load.php';
             require_once './handlers/categories.php';
+            global $ProductObj;
+            $ProductObj = new LoadProducts();
+
+                $ProductObj->Load("Shoes");
+
+                $filters = [
+                    'type' => 'jacket',
+                    'labas'=>'labas2'
+                ];
 
             $Categories = new Categories();
             $Categories->Load(); ?>
             <form id="category-list" action="" method="POST">
                 <?php foreach($Categories->result as $row) { ?>
                     <input type="submit" name="ctg" class="category" value='<?php echo $row["category"]; ?>'>
+                    <input type="text" style="display:None" name="filter" class="category" value='<?php echo json_encode($filters) ?>'>
                 <?php } ?>
             </form>
             <div id="product-list">
                 <!-- GENERATE PRODUCTS -->
                 <?php
-                $ProductObj = new LoadProducts();
-                $ProductObj->Load("Shoes");
-
-                include './GlobalsList.php';
-                global $gList;
-                $gList["ProductObj"] = $ProductObj;
-
-
+   
                 // print_r($gList["ProductObj"]);
                 foreach ($ProductObj->paginationResult as $row) {?>
                     <div class="product">

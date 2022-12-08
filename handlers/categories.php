@@ -19,7 +19,9 @@ class Categories {
 
 if (isset($_POST["ctg"])) {
     $category = $_POST["ctg"];
-    global $gList;
-    print_r($gList);
-    // print_r($GLOBALS["gList"]);
+    if(!empty($_POST['filter'])) {
+    $filters = json_decode($_POST['filter'], true);
+    var_dump($filters);
+    unset($filters);
+    }
 }
