@@ -48,21 +48,23 @@
             }?>
             <form id="category-list" action="" method="POST">
                 <?php foreach($filters as $filter) {?>
-                    <input type="submit" name="ctg" class="category" onclick="" value='<?php echo $filter["category"];?>'>
+                    <input type="submit" name="ctg" class="category" onclick="LoadProducts();" value='<?php echo $filter["category"];?>'>
                 <?php }?>
             </form>
 
             <div id="product-list">
                 <!-- GENERATE PRODUCTS -->
                 <script>
-                    $.ajax({
-                        url: 'ajax/getProductList.ajax.php',
-                        type: "GET",
-                        dataType: "json",
-                        data: <?php echo json_encode($testIds); ?>
-                    }).always(function(callback){
-                        $("#product-list").append(callback.html);
-                    });
+                    function LoadProducts() {
+                        $.ajax({
+                            url: 'ajax/getProductList.ajax.php',
+                            type: "GET",
+                            dataType: "json",
+                            data: <?php echo json_encode($testIds); ?>
+                        }).always(function(callback){
+                            $("#product-list").append(callback.html);
+                        });
+                    }
                 </script>
             </div>
             <?php

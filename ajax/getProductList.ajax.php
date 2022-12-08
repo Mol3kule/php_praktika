@@ -1,11 +1,9 @@
 <?php
 
 require '../handlers/database.php';
-// var_dump($_GET['test']);
 
-
-if (isset($_POST["ctg"])) {
-    $category = $_POST["ctg"];
+// if (isset($_POST["ctg"])) {
+    // $category = $_POST["ctg"];
     $db = new Database();
     $db->Open();
 
@@ -19,17 +17,16 @@ if (isset($_POST["ctg"])) {
         $result = $query->fetch();
         array_push($results, $result);
     }
-
-    // print_r($results);
-}
-
-$html = '';
-foreach($results as $row) {
-    $html .= '<div class="product">';
-    $html .= '<img class="productImg" src="<?php echo $row["imageSrc"]; ?>" alt="Not Loaded">';
-    $html .= '<div class="product-name"><?php echo $row["product_name"]; ?></div>';
-    $html .= '<div class="product-quantity"><span style="color: red;">Sandelyje:</span> <?php echo $row["quantity"]; ?></div>';
-    $html .= '</div>';
-}
-
-echo json_encode(['html' => $html]);
+    $html = '';
+    foreach($results as $row) {
+    
+        $html .= "
+        <div class='product'>
+            <img class='productImg' src={$row['imageSrc']} alt='Not Loaded'>
+            <div class='product-name'>{$row['product_name']}</div>
+            <div class='product-quantity'><span style='color: red;'>Sandelyje:</span> {$row['quantity']} </div>
+        </div>";
+    }
+    
+    echo json_encode(['html' => $html]);
+// }
