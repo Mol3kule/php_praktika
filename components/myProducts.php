@@ -12,14 +12,14 @@
 <body>
     <div class="container">
         <div class="top-nav-ct">
-            <ul class="top-nav">
+            <ul id="top-nav" class="top-nav">
                 <?php
                     if (!isset($_COOKIE['UId'])) {
                         header("location: ./components/logout.php");
                 ?>
                 <?php } else {?>
                     <a class="nav-bar myProducts" href="../index.php">Pagrindinis</a>
-                    <a class="nav-bar addNew" href="../index.php">Pridėti naują</a>
+                    <a class="nav-bar addNew" href="./newProduct.php">Pridėti naują</a>
                     <a class="nav-bar logout" href="components/logout.php">Atsijungti</a>
                 <?php }?>
             </ul>
@@ -37,11 +37,68 @@
 
                     $(".product").on("click", function(e) {
                         let id = e.currentTarget.dataset.id;
+                        $.ajax({
+                            url: '../ajax/getProductData.ajax.php',
+                            type: "GET",
+                            dataType: "json",
+                            data: {"id": id}
+                        }).always(function(cb){
+                            var topNav = document.getElementById('top-nav');
+                            var productList = document.getElementById('product-list');
+                            var formTab = document.getElementById('form-tab');
+                            productList.style.display = 'none';
+                            var ProductData = cb.ProductData[0];
+                            document.getElementById('title').value = ProductData.product_name;
+                            document.getElementById('imgUrl').value = ProductData.imageSrc;
+                            document.getElementById('category').value = ProductData.category;
+                            document.getElementById('description').value = ProductData.description;
+                            
+                            formTab.style.display = 'block';
+
+                            $("#saveBtn").on("click", function() {
+                                formTab.style.display = 'none';
+                                productList.style.display = 'grid';
+                                $.ajax({
+                                    url: '../ajax/updateProductData.ajax.php',
+                                    type: "GET",
+                                    dataType: "json",
+                                    data: {
+                                        id: id, 
+                                        title: document.getElementById('title').value, 
+                                        imgUrl: document.getElementById('imgUrl').value,
+                                        category: document.getElementById('category').value,
+                                        description: document.getElementById('description').value
+                                    }
+                                }).always(function(cb){
+                                    location.reload();
+                                });
+                            });
+
+                            $("#deleteBtn").on("click", function() {
+                                $.ajax({
+                                    url: '../ajax/deleteProduct.ajax.php',
+                                    type: "GET",
+                                    dataType: "json",
+                                    data: {id: id}
+                                }).always(function(cb){
+                                    location.reload();
+                                });
+                            });
+                        });
                     });
                 });
             </script>
-            <div id="product-list">
+            <div id="form-tab" style="display: none;">
+                <form action="">
+                    <input class="inputEdit" id="title" type="text" placeholder="Pavadinimas"><br>
+                    <input id="imgUrl" class="inputEdit" type="text" placeholder="Nuotraukos URL"><br>
+                    <input id="category" class="inputEdit" type="text" placeholder="Kategorija"><br>
+                    <textarea id="description" class="inputEdit desc" cols="30" rows="10" placeholder="Aprašymas"></textarea><br>
+                    <button id="saveBtn" type="button" class="updateBtn update">Atnaujinti</button>
+                    <button id="deleteBtn" type="button" class="updateBtn delete">Pašalinti</button>
+                </form>
             </div>
+            <div id="product-list"></div>
         </div>
     </div>
 </body>
