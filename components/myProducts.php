@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/myProducts.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <title>Mano Produktai</title>
 </head>
 <body>
@@ -27,16 +28,20 @@
         <div class="products-ct">
             <script>
                 $.ajax({
-                    url: 'ajax/getUserProducts.ajax.php',
+                    url: '../ajax/getUserProducts.ajax.php',
                     type: "GET",
                     dataType: "json",
-                    // data: <php echo json_encode($testIds); ?>
                     data: {}
                 }).always(function(callback){
                     $("#product-list").html(callback.products);
+
+                    $(".product").on("click", function(e) {
+                        let id = e.currentTarget.dataset.id;
+                    });
                 });
             </script>
-            <div id="product-list"></div>
+            <div id="product-list">
+            </div>
         </div>
     </div>
 </body>
