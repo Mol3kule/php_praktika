@@ -20,6 +20,7 @@
                     <a class="nav-bar register" href="components/registration.php">Registruotis</a>
                     <a class="nav-bar login" href="components/login.php">Prisijungti</a>
                 <?php } else {?>
+                    <a class="nav-bar myProducts" href="components/myProducts.php">Mano Produktai</a>
                     <a class="nav-bar logout" href="components/logout.php">Atsijungti</a>
                 <?php }?>
             </ul>
@@ -52,18 +53,48 @@
             <div id="product-list">
                 <!-- GENERATE PRODUCTS -->
                 <script>
-                        $('.category').on('click', function(element) {
-                            $.ajax({
-                                url: 'ajax/getProductList.ajax.php',
-                                type: "GET",
-                                dataType: "json",
-                                // data: <php echo json_encode($testIds); ?>
-                                data: {"category": element.target.value, "ProductObj": {<?php json_encode($TestObj); ?>}}
-                            }).always(function(callback){
-                                $("#product-list").html(callback.products);
-                                $("#pagination-tab").html(callback.pagination);
-                            });
+                    let autoLoaded = false;
+                    if (!autoLoaded) {
+                        $.ajax({
+                            url: 'ajax/getProductList.ajax.php',
+                            type: "GET",
+                            dataType: "json",
+                            // data: <php echo json_encode($testIds); ?>
+                            data: {"category": "", "ProductObj": <?php echo json_encode($TestObj); ?>}
+                        }).always(function(callback){
+                            $("#product-list").html(callback.products);
                         });
+
+                        $.ajax({
+                            url: 'ajax/getProductPages.ajax.php',
+                            type: 'GET',
+                            dataType: 'JSON',
+                            data: {"ProductObj": <?php echo json_encode($TestObj); ?>}
+                        }).always(function(cb) {
+                            $("#pagination-tab").html(cb.pagination);
+                        });
+                        autoLoaded = true;
+                    }
+                    $('.category').on('click', function(element) {
+                        $.ajax({
+                            url: 'ajax/getProductList.ajax.php',
+                            type: "GET",
+                            dataType: "json",
+                            // data: <php echo json_encode($testIds); ?>
+                            data: {"category": element.target.value, "ProductObj": <?php echo json_encode($TestObj); ?>}
+                        }).always(function(callback){
+                            $("#product-list").html(callback.products);
+                        });
+
+                        $.ajax({
+                            url: 'ajax/getProductPages.ajax.php',
+                            type: 'GET',
+                            dataType: 'JSON',
+                            data: {"ProductObj": <?php echo json_encode($TestObj); ?>}
+                        }).always(function(cb) {
+                            $("#pagination-tab").html(cb.pagination);
+                        });
+                    });
                 </script>
             </div>
             <ul id="pagination-tab" class="pagination"></ul>

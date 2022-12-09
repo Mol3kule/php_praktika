@@ -9,6 +9,7 @@ if(ISSET($_POST['register'])){
 			$username = $_POST['username'];
 			$email = $_POST['email'];
 			$password = $_POST['password'];
+			$password = md5($password);
 			$db->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$result = $db->connection->prepare("INSERT INTO `users` SET `username` = '$username', `email` = '$email', `password` = '$password'")->execute();
 			header('location: ../components/login.php');

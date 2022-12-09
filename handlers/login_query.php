@@ -8,6 +8,7 @@ if (isset($_POST['login'])) {
 	if ($_POST['username'] != "" || $_POST['password'] != "") {
 		$username = $_POST['username'];
 		$password = $_POST['password'];
+		$password = md5($password);
 		$query = $db->connection->prepare("SELECT * FROM `users` WHERE `username` = ? AND `password` = ?");
 		$query->execute(array($username, $password));
 		$row = $query->rowCount();
