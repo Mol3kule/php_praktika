@@ -20,7 +20,7 @@
                 <?php } else {?>
                     <a class="nav-bar myProducts" href="../index.php">Pagrindinis</a>
                     <a class="nav-bar addNew" href="./newProduct.php">Pridėti naują</a>
-                    <a class="nav-bar logout" href="components/logout.php">Atsijungti</a>
+                    <a class="nav-bar logout" href="./logout.php">Atsijungti</a>
                 <?php }?>
             </ul>
         </div>

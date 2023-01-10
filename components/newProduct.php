@@ -19,8 +19,8 @@
                 ?>
                 <?php } else {?>
                     <a class="nav-bar myProducts" href="../index.php">Pagrindinis</a>
-                    <a class="nav-bar myProducts" href="../components/myProducts.php">Mano Produktai</a>
-                    <a class="nav-bar logout" href="components/logout.php">Atsijungti</a>
+                    <a class="nav-bar myProducts" href="./myProducts.php">Mano Produktai</a>
+                    <a class="nav-bar logout" href="./logout.php">Atsijungti</a>
                 <?php }?>
             </ul>
         </div>
